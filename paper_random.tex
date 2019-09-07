@@ -1,0 +1,36 @@
+\documentclass[11pt]{article}
+\usepackage{hyperref}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\pagenumbering{gobble}
+
+\begin{document}
+  \section*{Auditory prediction errors as biomarkers of schizophrenia}
+  Alzheimer’s disease is the most common form of dementia associated with aging, and lacks an effective treatment option. Early and accurate diagnosis, in addition to quick elimination of differential diagnosis, allows us to provide timely treatments that delay the progression of AD. Early detection of the disease can be possible through imaging techniques like MRI, but MRI images are high dimensional and are difficult for humans to analyse. Machine learning methods can prove to be more effective than human radiologists in predicting Alzheimer’s disease(AD) through neuroimaging.
+
+  This paper aims to identify neuroimaging biomarkers that are able to accurately diagnose and monitor Alzheimer’s disease at very early stages and assess the response to AD-modifying therapies.\\
+
+  The paper proposes the use of Independent component analysis(ICA), a blind signal separation technique, coupled with Support Vector Machines(SVMs) to classify AD vs healthy patients, and AD vs Mild Cognitive Impairment(MCI) patients.
+  The study uses MRI data from 2 image datasets, namely the Open Access Series of Imaging Studies(OASIS) and Alzheimer’s Disease Neuroimaging Initiative(ADNI).
+  Atlas-registered, gain field-corrected, and brain-masked images from the OASIS dataset are used.
+  MRI images in the ADNI dataset are preprocessed and normalised into a standard space defined by the template image T1.nii supplied with the SPM toolbox.
+  All MRI images are normalised into 160x192x160 voxel-wise images.
+  To further analyse the MRI images, whole brain images are segmented into grey matter(GM), white matter(WM), and cerebrospinal fluid(CSF).
+
+  The normalised and pre-processed brain images are decomposed into MRI basis functions and corresponding coefficients using the FastICA algorithm. 
+  After ICA computation, the MRI signals are reconstructed by linearly combining the set of basis functions and corresponding coefficients.
+  Finally, the separated coefficients are fed into a SVM based classifier to diagnose AD or MCI subjects from normal controls.
+  Multiple experiments are conducted on the processed dataset and the proposed model.
+  The first experiment involves feature extraction and representation on the ICA feature subspace.
+  In the second experiment, classification of AD vs NC using images from the OASIS dataset is performed. The training is done in 2 different ways, using the leave-one-out method and the conventional train-val method.
+  The third experiment involves classfication of ADNI MRI images for AD vs NC and MCI vs NC using the same model.
+  Another separate experiment is conducted with the ADNI dataset in which only grey matter(GM) of the brain was analysed for classification.\\
+
+  %Findings
+  The model obtains a class rate classification accuracy of 85.7\%  and 88.9\% on ADNI MRI images and ADNI GM images respectively, by using 90\% of the data in the training set.
+  The leave-one-out training method is shown to provide better accuracies in almost all cases when compared to the conventional method.\\
+
+  %Possible Contribution
+  An alternate model would be to use a 3D Convolutional Neural Network(CNN) for classification. Sparse encoders may be used to reduce the dimensions of MRI images and provide some unsupervised learning based features. The authors themselves state some ways to extend the paper, including, evaluating the effect of factors like age, gender, amyloid pathology on the features and how many features are related to AD.
+  PET/MR imaging can be used to understand the effect of AD on the brain, and the effectiveness of medications \& treatment as time progresses. Neuroimaging coupled with deep learning could be used to understand the pathophysiology of Alzheimer's.
+
+\end{document}

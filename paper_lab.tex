@@ -1,0 +1,37 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\pagenumbering{gobble}
+
+\begin{document}
+  \section*{Auditory prediction errors as biomarkers of schizophrenia}
+  
+  Schizophrenia is a mental illness characterised by abnormal behaviour, strange speech, and a decreased ability to understand reality. The disorder affects about 1\% of the world’s population but there is no objective test for its diagnosis, yet. Schizophrenia is currently diagnosed through symptomatic evidence collected through patient interview. This method relies on self-report measures and ultimately on a subjective clinical decision. By looking for reproducible and robust biomarkers, doctors can be enabled to provide more accurate and effective diagnoses.
+  This paper aims to develop objective biologically-based computational tools which aid diagnosis of Schizophrenia and relies on accessible imaging techniques such as EEG.
+  The authors hypothesise that Mismatch Negativity (MMN) responses to auditory-oddball experiments can be a potential biomarker for schizophrenia.
+
+  In an encephalographic auditory-oddball experiment, participants listened to sequences of short audio stimuli repeating at 500 ms intervals presented via headphones while watching a silent movie.
+  3 different stimulus variations, were tested in separate blocks. 
+  The 3 paradigms are duration deviation, gap paradigm, and inter-aural time difference paradigm.
+  30 EEG sites + EOG were collected using a 64-electrode head-cap at a sampling rate of 500Hz with referencing to the nose electrode. Offline Signal processing was performed using the Statistical Parametric mapping toolbox.
+  Data cleaning and correction is done by using band-pass Butterworth filters, baseline correction, and artefact-rejection. To the 32x32x256 dimensional images, masking is applied to 0-450ms and to 50-250ms which is assumed to contain the auditory MMN component.
+  Support Vector Machine (SVM) and Gaussian Process Classifier (GPC) from the Pattern Recognition Toolbox(PRoNTo) is used to perform binary classification. Training is done using 10-fold cross validation, where, 90\% of data used as the training set and the rest as test set with number of subjects remaining balanced in both sets.
+  To determine statistical significance of the result, permutation tests are calculated for each model and cross-validated, retraining the model with randomised labels and 1000 repetitions.
+  To account for multiple comparisons among the 96 total hypotheses, false discovery rate controlling procedures with desired false discovery rate of $q=0.05$ are applied. 
+  Accuracies are not considered accurate unless a critical uncorrected significance level of $p \le 0.005$ is achieved via permutation testing. 3 different machine learning regression algorithms (KKR, RVR, GPR) are trained to predict SANS, SAPS, GAF scores with 10 fold cross-validation. Statistical significance of results is assessed with Šidak correction for multiple comparisons.
+
+
+  % Findings
+  Contrary to initial hypothesis, there was no marked improvement found in classification accuracy when applying the 50-250ms mask. No significant differences were found between algorithms, responses or normalisation operations.
+  The model with the best accuracy was obtained using GPC with MMN response to the left pad paradigm as features, further processed with 0-450ms temporal mask and normalisation operations.
+  The greatest classification accuracy was obtained through a monaural gap stimulus paradigm in the left ear, with group membership classification accuracies up to 80.48\%.
+  The GAF scores predicted by the regression model based on mismatch responses to this left gap paradigm were shown to have 0.73 correlation with the true GAF scores.
+
+  In both classification and regression modelling, performance was shown to be highly dependent on the stimulus paradigm and measured response used as the feature set. The paper finds that there is a difference between the left and right paradigms, which is shown to be consistent with previous findings.\\
+
+  % My possible contribution
+  An alternate model would be to use Stacked Denoising Autoencoders (SDAE) to reduce dimensions of the spatio-temporal images using unsupervised learning. Deep learning is usually more effective on data with lesser dimensions, hence, decreasing the dimensions by letting the autoencoder find relevant features may increase accuracy. The normalised images can then be passed through a Convolutional Neural Network(CNN) like ResNeXt for classification.
+
+  Another way to extend the paper would be to use other bio-signals like ECG along with imaging techniques like fMRI/PET to find more biomarkers.
+  Building models to explain the mechanism behind schizophrenia using neuroimaging would be the endgoal.
+
+\end{document}
