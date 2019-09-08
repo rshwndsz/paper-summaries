@@ -11,7 +11,7 @@
 
   The paper proposes the use of Independent component analysis(ICA), a blind signal separation technique, coupled with Support Vector Machines(SVMs) to classify AD vs healthy patients, and AD vs Mild Cognitive Impairment(MCI) patients.
   The study uses MRI data from 2 image datasets, namely the Open Access Series of Imaging Studies(OASIS) and Alzheimer’s Disease Neuroimaging Initiative(ADNI).
-  Atlas-registered, gain field-corrected, and brain-masked images from the OASIS dataset are used.
+  Atlas-registered, gain field-corrected, and brain-masked images from the OASIS dataset are used, while,
   MRI images in the ADNI dataset are preprocessed and normalised into a standard space defined by the template image T1.nii supplied with the SPM toolbox.
   All MRI images are normalised into 160x192x160 voxel-wise images.
   To further analyse the MRI images, whole brain images are segmented into grey matter(GM), white matter(WM), and cerebrospinal fluid(CSF).
@@ -31,6 +31,7 @@
 
   %Possible Contribution
   An alternate model would be to use a 3D Convolutional Neural Network(CNN) for classification. Sparse encoders may be used to reduce the dimensions of MRI images and provide some unsupervised learning based features. The authors themselves state some ways to extend the paper, including, evaluating the effect of factors like age, gender, amyloid pathology on the features and how many features are related to AD.
+
   PET/MR imaging can be used to understand the effect of AD on the brain, and the effectiveness of medications \& treatment as time progresses. Neuroimaging coupled with deep learning could be used to understand the pathophysiology of Alzheimer's.
 
 \end{document}
